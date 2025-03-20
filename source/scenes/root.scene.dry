@@ -250,7 +250,7 @@ Q.workers_ddp = 2;
 Q.workers_dvp = 0;
 Q.workers_dnvp = 6;
 Q.workers_nsdap = 0;
-Q.workers_other = 20;
+Q.workers_other = 10;
 
 Q.new_middle_spd = 8;
 Q.new_middle_kpd = 1;
@@ -277,7 +277,7 @@ Q.rural_ddp = 4;
 Q.rural_dvp = 14;
 Q.rural_dnvp = 42;
 Q.rural_nsdap = 3;
-Q.rural_other = 35;
+Q.rural_other = 15;
 
 Q.unemployed_spd = 25;
 Q.unemployed_kpd = 55;
@@ -295,7 +295,7 @@ Q.catholics_ddp = 0;
 Q.catholics_dvp = 5;
 Q.catholics_dnvp = 5;
 Q.catholics_nsdap = 0;
-Q.catholics_other = 35;
+Q.catholics_other = 15;
 
 Q.workers_spd_old = 60;
 Q.new_middle_spd_old = 8;
