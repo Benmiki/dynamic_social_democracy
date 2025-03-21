@@ -29,7 +29,7 @@ The Saxon state elections are to be held now.
 on-arrival: {!
 
 var saxony_adjustment_factors = {
-    spd: 1.5,
+    spd: 1.25,
     sapd: 1.0,
     kpd: 1.25,
     ddp: 1.0,
@@ -219,8 +219,8 @@ Q.other_r_saxony = (Q.other_r_saxony != undefined ? parseFloat(Q.other_r_saxony.
 Q.kvp_r_saxony = (Q.kvp_r_saxony != undefined ? parseFloat(Q.kvp_r_saxony.toFixed(1)) : 0);
 Q.dnf_r_saxony = (Q.dnf_r_saxony != undefined ? parseFloat(Q.dnf_r_saxony.toFixed(1)) : 0);
 
-let spd_share = 0.50;
-let aspd_share = 0.50;
+let spd_share = 0.95;
+let aspd_share = 0.05;
 
 if (Q.reformists_resign) aspd_share += 0.1;
 if (Q.unions_independent) aspd_share += 0.2;
