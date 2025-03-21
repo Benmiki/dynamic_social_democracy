@@ -31,7 +31,7 @@ on-arrival: enemies = "far right"; left_strength += 5; left_dissent -= 5; worker
 Attacking the <span style="color: #7A3C00;">far</span>-<span style="color: #3E88B3;">right</span> and <span style="color: #700000;">left</span> is popular among the entire party, although the left considers the bourgeois parties to be just as dangerous, while the right is critical of our lack of response to the <span style="color: #700000;">**KPD**</span>. Our bourgeois coalition partners are also skeptical of our lack of commitment to anti-communism.
 
 @nsdap
-on-arrival: enemies = "NSDAP"; neorevisionist_strength += 5; nazi_urgency += 1; workers_nsdap -= 4; unemployed_nsdap -= 4;
+on-arrival: enemies = "NSDAP"; neorevisionist_strength += 5; nazi_urgency += 1; workers_nsdap -= 40; unemployed_nsdap -= 40;
 
 [? if nazi_urgency == 0 or nsdap_r < 10 : The <span style="color: #7A3C00;">**NSDAP**</span> is a tiny party right now, with more bark than bite. Many in our party are questioning our choices. ?][? if nazi_urgency > 0 and nsdap_r >= 10 : The <span style="color: #7A3C00;">Nazis</span> are the most urgent problem for us to deal with. ?]
 
