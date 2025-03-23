@@ -244,13 +244,13 @@ Q.lvp_formed = 0;
 // Support for party by social group
 // they don't have to sum to 100 since the electoral calculations will be normalized.
 Q.workers_spd = 60;
-Q.workers_kpd = 0;
+Q.workers_kpd = 19;
 Q.workers_z = 5;
 Q.workers_ddp = 2;
 Q.workers_dvp = 0;
-Q.workers_dnvp = 6;
+Q.workers_dnvp = 0;
 Q.workers_nsdap = 0;
-Q.workers_other = 33;
+Q.workers_other = 20;
 
 Q.new_middle_spd = 8;
 Q.new_middle_kpd = 1;
@@ -860,7 +860,7 @@ For more information on the politics and government of the German Republic, see 
 - @1928_historical: Begin (<span style="color: #611813;">historical</span> mode)
 
 @1928_easy
-on-arrival: difficulty = -1; resources = 4; dues = 3; base_dues = 3; rb_strength = 2500; kpd_relation = 29; z_relation = 54; dvp_relation = 49; ddp_relation = 65; budget = 5;
+on-arrival: difficulty = -1; resources = 4; dues = 3; base_dues = 3; rb_strength = 2500; kpd_relation = 100; z_relation = 40; dvp_relation = 49; ddp_relation = 100; budget = 5;
 go-to: 1928_main
 
 @1928_hard
