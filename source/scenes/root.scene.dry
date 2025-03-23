@@ -294,8 +294,8 @@ Q.catholics_z = 46;
 Q.catholics_ddp = 0;
 Q.catholics_dvp = 5;
 Q.catholics_dnvp = 5;
-Q.catholics_nsdap = 15;
-Q.catholics_other = 0;
+Q.catholics_nsdap = 0;
+Q.catholics_other = 15;
 
 Q.workers_spd_old = 60;
 Q.new_middle_spd_old = 8;
