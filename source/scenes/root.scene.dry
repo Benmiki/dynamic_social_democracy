@@ -254,17 +254,17 @@ Q.workers_other = 20;
 
 Q.new_middle_spd = 8;
 Q.new_middle_kpd = 1;
-Q.new_middle_z = 10;
-Q.new_middle_ddp = 23;
+Q.new_middle_z = ;
+Q.new_middle_ddp = 33;
 Q.new_middle_dvp = 22;
 Q.new_middle_dnvp = 0;
 Q.new_middle_nsdap = 4;
 Q.new_middle_other = 70;
 
-Q.old_middle_spd = 4;
+Q.old_middle_spd = 0;
 Q.old_middle_kpd = 0;
-Q.old_middle_z = 5;
-Q.old_middle_ddp = 9;
+Q.old_middle_z = 0;
+Q.old_middle_ddp = 18;
 Q.old_middle_dvp = 24;
 Q.old_middle_dnvp = 0;
 Q.old_middle_nsdap = 8;
@@ -272,8 +272,8 @@ Q.old_middle_other = 70;
 
 Q.rural_spd = 8;
 Q.rural_kpd = 0;
-Q.rural_z = 5;
-Q.rural_ddp = 4;
+Q.rural_z = 0;
+Q.rural_ddp = 9;
 Q.rural_dvp = 14;
 Q.rural_dnvp = 0;
 Q.rural_nsdap = 3;
