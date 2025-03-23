@@ -257,27 +257,27 @@ Q.new_middle_kpd = 1;
 Q.new_middle_z = 10;
 Q.new_middle_ddp = 23;
 Q.new_middle_dvp = 22;
-Q.new_middle_dnvp = 10;
+Q.new_middle_dnvp = 0;
 Q.new_middle_nsdap = 4;
-Q.new_middle_other = 22;
+Q.new_middle_other = 32;
 
 Q.old_middle_spd = 4;
 Q.old_middle_kpd = 0;
 Q.old_middle_z = 5;
 Q.old_middle_ddp = 9;
 Q.old_middle_dvp = 24;
-Q.old_middle_dnvp = 22;
+Q.old_middle_dnvp = 0;
 Q.old_middle_nsdap = 8;
-Q.old_middle_other = 18;
+Q.old_middle_other = 40;
 
 Q.rural_spd = 8;
 Q.rural_kpd = 0;
 Q.rural_z = 5;
 Q.rural_ddp = 4;
 Q.rural_dvp = 14;
-Q.rural_dnvp = 42;
+Q.rural_dnvp = 0;
 Q.rural_nsdap = 3;
-Q.rural_other = 15;
+Q.rural_other = 57;
 
 Q.unemployed_spd = 25;
 Q.unemployed_kpd = 55;
