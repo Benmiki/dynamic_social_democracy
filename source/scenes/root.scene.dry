@@ -254,7 +254,7 @@ Q.workers_other = 20;
 
 Q.new_middle_spd = 8;
 Q.new_middle_kpd = 1;
-Q.new_middle_z = ;
+Q.new_middle_z = 0;
 Q.new_middle_ddp = 33;
 Q.new_middle_dvp = 22;
 Q.new_middle_dnvp = 0;
