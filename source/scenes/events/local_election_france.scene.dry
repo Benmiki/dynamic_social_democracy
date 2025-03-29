@@ -66,6 +66,80 @@ Q.prs_france_elections_vote = 5.4;
 Q.pdp_france_elections_vote = 3.2;
 Q.pup_france_elections_vote = 0.8;
 
+if (Q.unemployed < 10) {
+    france_adjustment_factors.ad += 0.06;
+    france_adjustment_factors.fr += 0.06;
+    france_adjustment_factors.pdp += 0.06;
+    france_adjustment_factors.rad += 0.06;
+} else if (Q.unemployed < 18) {
+    france_adjustment_factors.ad += 0.04;
+    france_adjustment_factors.fr += 0.04;
+    france_adjustment_factors.pdp += 0.04;
+    france_adjustment_factors.rad += 0.04;
+} else if (Q.unemployed < 25) {
+    france_adjustment_factors.ad += 0.03;
+    france_adjustment_factors.fr += 0.03;
+    france_adjustment_factors.pdp += 0.03;
+    france_adjustment_factors.rad += 0.03;
+} else if (Q.unemployed < 32) {
+    france_adjustment_factors.ad += 0.02;
+    france_adjustment_factors.fr += 0.02;
+    france_adjustment_factors.pdp += 0.02;
+    france_adjustment_factors.rad += 0.02;
+} else if (Q.unemployed < 40) {
+    france_adjustment_factors.ad += 0.01;
+    france_adjustment_factors.fr += 0.01;
+    france_adjustment_factors.pdp += 0.01;
+    france_adjustment_factors.rad += 0.01;
+}
+
+if (Q.economic_growth >= 6) {
+    france_adjustment_factors.ad += 0.06;
+    france_adjustment_factors.fr += 0.06;
+    france_adjustment_factors.pdp += 0.06;
+    france_adjustment_factors.rad += 0.06;
+} else if (Q.economic_growth >= 4) {
+    france_adjustment_factors.ad += 0.04;
+    france_adjustment_factors.fr += 0.04;
+    france_adjustment_factors.pdp += 0.04;
+    france_adjustment_factors.rad += 0.04;
+} else if (Q.economic_growth >= 2) {
+    france_adjustment_factors.ad += 0.03;
+    france_adjustment_factors.fr += 0.03;
+    france_adjustment_factors.pdp += 0.03;
+    france_adjustment_factors.rad += 0.03;
+} else if (Q.economic_growth >= 0) {
+    france_adjustment_factors.ad += 0.02;
+    france_adjustment_factors.fr += 0.02;
+    france_adjustment_factors.pdp += 0.02;
+    france_adjustment_factors.rad += 0.02;
+} else if (Q.economic_growth >= -2) {
+    france_adjustment_factors.ad += 0.01;
+    france_adjustment_factors.fr += 0.01;
+    france_adjustment_factors.pdp += 0.01;
+    france_adjustment_factors.rad += 0.01;
+}
+
+if (Q.west_relation >= 3) {
+    france_adjustment_factors.sfio += (Q.west_relation / 50);
+    france_adjustment_factors.prs += (Q.west_relation / 100);
+    france_adjustment_factors.rad += (Q.west_relation / 100);
+    if (Q.kpd_relation >= 50) {
+        france_adjustment_factors.pcf += (Q.kpd_relation / 400);
+        france_adjustment_factors.pup += (Q.kpd_relation / 400);
+    }
+}
+
+if (Q.pacifism >= 3) {
+    france_adjustment_factors.sfio += (Q.pacifism / 50);
+    france_adjustment_factors.prs += (Q.pacifism / 100);
+    france_adjustment_factors.rad += (Q.pacifism / 100);
+    if (Q.kpd_relation >= 50) {
+        france_adjustment_factors.pcf += (Q.kpd_relation / 400);
+        france_adjustment_factors.pup += (Q.kpd_relation / 400);
+    }
+}
+
 Q.sfio_france_elections_vote = Q.sfio_france_elections_vote*france_adjustment_factors.sfio;
 Q.rad_france_elections_vote = Q.rad_france_elections_vote*france_adjustment_factors.rad;
 Q.ad_france_elections_vote = Q.ad_france_elections_vote*france_adjustment_factors.ad;
@@ -137,10 +211,6 @@ Q.prs_r_france = (Q.prs_r_france != undefined ? parseFloat(Q.prs_r_france.toFixe
 Q.pdp_r_france = (Q.pdp_r_france != undefined ? parseFloat(Q.pdp_r_france.toFixed(1)) : 0);
 Q.pup_r_france = (Q.pup_r_france != undefined ? parseFloat(Q.pup_r_france.toFixed(1)) : 0);
 
-Q.left_coalition_france = parseFloat((Q.sfio_r_france + Q.disp_rad_r_france + Q.prs_r_france).toFixed(1));
-Q.bourgeois_coalition_france = parseFloat((Q.ad_r_france + Q.fr_r_france + Q.pdp_r_france).toFixed(1));
-Q.republican_coalition_france = parseFloat((Q.rad_r_france + Q.prs_r_france + Q.ad_r_france).toFixed(1));
-
 Q.disp_ind_rad_votes_france = Q.rad_france_elections_vote*0.34;
 Q.disp_rad_votes_france = Q.rad_france_elections_vote*0.66;
 Q.disp_ind_rad_r_france = Q.rad_r_france*0.28;
@@ -150,6 +220,11 @@ Q.disp_ind_fr_votes_france = Q.fr_france_elections_vote*0.32;
 Q.disp_fr_votes_france = Q.fr_france_elections_vote*0.68;
 Q.disp_ind_fr_r_france = Q.fr_r_france*0.30;
 Q.disp_fr_r_france = Q.fr_r_france*0.70;
+
+Q.pop_front_france = parseFloat((Q.pcf_r_france + Q.pup_r_france + Q.sfio_r_france + Q.prs_r_france).toFixed(1));
+Q.left_coalition_france = parseFloat((Q.sfio_r_france + Q.disp_rad_r_france + Q.prs_r_france).toFixed(1));
+Q.bourgeois_coalition_france = parseFloat((Q.ad_r_france + Q.fr_r_france + Q.pdp_r_france + Q.disp_ind_rad_r_france).toFixed(1));
+Q.republican_coalition_france = parseFloat((Q.rad_r_france + Q.prs_r_france + Q.ad_r_france).toFixed(1));
 
 Q.french_parties = ['sfio', 'pcf', 'pup', 'prs', 'rad', 'pdp', 'ad', 'fr'];
 
@@ -164,8 +239,8 @@ for (var party of Q.french_parties) {
     Q['str_change_' + party + '_france'] = sign + parseFloat(Q['change_' + party + '_r_france']).toFixed(1);
 
     // Calculate changes in votes
-    Q['change_' + party + '_votes_france'] = Q[party + '_france_elections_vote'] - Q['previous_' + party + '_france_elections_vote'];
-    if (Q['previous_' + party + '_france_elections_vote'] === undefined) {
+    Q['change_' + party + '_votes_france'] = Q[party + '_france_elections_vote'] - Q['old_' + party + '_france_elections_vote'];
+    if (Q['old_' + party + '_france_elections_vote'] === undefined) {
         Q['change_' + party + '_votes_france'] = Q[party + '_france_elections_vote'];
     }
 
@@ -223,7 +298,7 @@ var sign2 = Q.change_fr_r_france > 0
 : Q.change_fr_r_france < 0 
   ? '<img src="img/arrowdown.jpg"> ' 
   : '<img src="img/steady.jpg"> ';
-Q.str_change_rad_france = sign2 + Math.abs(Q.change_fr_r_france).toFixed(1);
+Q.str_change_fr_france = sign2 + Math.abs(Q.change_fr_r_france).toFixed(1);
 
 Q.change_fr2_votes_france = Q.disp_ind_fr_votes_france - 2.3;
 var sign2 = Q.change_fr2_votes_france > 0 
@@ -377,7 +452,7 @@ if (window && d3) {
 
     var lines = d3.linegraph(false, false,
             Q.parties,
-            {'spd': '#E3000F', 'kpd': '#700000', 'ddp': '#D3C24D', 'z': '#000', 'dvp': '#D5AC27', 'dnvp': '#3E88B3', 'nsdap': '#7A3C00', 'other': '#a0a0a0', 'sapd': '#9B0000', 'dnf': '#003755', 'kvp': '#0087DC', 'lvp': '#FFCC00'},
+            {'spd': '#ff0000', 'kpd': '#700000', 'ddp': '#D3C24D', 'z': '#000', 'dvp': '#D5AC27', 'dnvp': '#3E88B3', 'nsdap': '#7A3C00', 'other': '#a0a0a0', 'sapd': '#9B0000', 'dnf': '#003755', 'kvp': '#0087DC', 'lvp': '#FFCC00'},
             {'spd': 'SPD', 'kpd': 'KPD', 'ddp': Q.ddp_name, 'z': Q.z_party_name + ' + BVP', 'dvp': 'DVP', 'dnvp': 'DNVP', 'nsdap': 'NSDAP', 'other': 'Others', 'sapd': 'SAPD', 'dnf': 'DNF', 'kvp': 'KVP', 'lvp': 'LVP'});
     lines.width(width).height(400);
     //var svg = lines(Q.election_records);
@@ -388,7 +463,7 @@ if (window && d3) {
     if (!Q.historical_mode) {
         var lines_2 = d3.linegraph(true, true,
             Q.parties,
-            {'spd': '#E3000F', 'kpd': '#700000', 'ddp': '#D3C24D', 'z': '#000', 'dvp': '#D5AC27', 'dnvp': '#3E88B3', 'nsdap': '#7A3C00', 'other': '#a0a0a0', 'sapd': '#9B0000', 'dnf': '#003755', 'kvp': '#0087DC', 'lvp': '#FFCC00'},
+            {'spd': '#ff0000', 'kpd': '#700000', 'ddp': '#D3C24D', 'z': '#000', 'dvp': '#D5AC27', 'dnvp': '#3E88B3', 'nsdap': '#7A3C00', 'other': '#a0a0a0', 'sapd': '#9B0000', 'dnf': '#003755', 'kvp': '#0087DC', 'lvp': '#FFCC00'},
             {'spd': 'SPD', 'kpd': 'KPD', 'ddp': Q.ddp_name, 'z': Q.z_party_name + ' + BVP', 'dvp': 'DVP', 'dnvp': 'DNVP', 'nsdap': 'NSDAP', 'other': 'Others', 'sapd': 'SAPD', 'dnf': 'DNF', 'kvp': 'KVP', 'lvp': 'LVP'});
         lines_2.width(width).height(400);
         d3.select("#party_support_history").datum(Q.party_support_records).call(lines_2);
@@ -404,42 +479,88 @@ go-to: france_coalition_menu
 
 {!<table>!} 
 {!<tr><td>Party</td><td>Vote share</td><td>% Change</td><td>Assembly Seats</td><td>% Change</td></tr>!}
-{!<tr><td><div class="box" style='background-color:#E3000F; outline: 2px; outline-style: solid;'> </div> !} **SFIO:** {!</td><td>!} **[+ sfio_france_elections_vote +]%** {!</td><td>!} **[+ str_votes_change_sfio_france +]** {!</td><td>!} **[+ sfio_r_france +]%** {!</td><td>!} **[+ str_change_sfio_france +]** {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#BB0000'> </div> !}PUP: {!</td><td>!} [+ pup_france_elections_vote +]% {!</td><td>!} [+ str_votes_change_pup_france +] {!</td><td>!} [+ pup_r_france +]% {!</td><td>!} [+ str_change_pup_france +] {!</td></tr>!}
+<tr><td colspan="5" style="text-align: center;"><strong>Left Cartel</strong></td></tr>
 
-{!<tr><td><div class="box" style='background-color:#700000'> </div> !}PCF: {!</td><td>!} [+ pcf_france_elections_vote +]% {!</td><td>!} [+ str_votes_change_pcf_france +] {!</td><td>!} [+ pcf_r_france +]% {!</td><td>!} [+ str_change_pcf_france +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#ff0000; outline: 2px; outline-style: solid;'> </div> !} <span class="tooltip-text" title="French Section of the Workers' International">SFIO</span> {!</td><td>!} **[+ sfio_france_elections_vote +]%** {!</td><td>!} **[+ str_votes_change_sfio_france +]** {!</td><td>!} **[+ sfio_r_france +]%** {!</td><td>!} **[+ str_change_sfio_france +]** {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#DE3163'> </div> !}PRS: {!</td><td>!} [+ prs_france_elections_vote +]% {!</td><td>!} [+ str_votes_change_prs_france +] {!</td><td>!} [+ prs_r_france +]% {!</td><td>!} [+ str_change_prs_france +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#FF6699'> </div> !} <span class="tooltip-text" title="Republican-Socialist Party">PRS</span>: {!</td><td>!} [+ prs_france_elections_vote +]% {!</td><td>!} [+ str_votes_change_prs_france +] {!</td><td>!} [+ prs_r_france +]% {!</td><td>!} [+ str_change_prs_france +] {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#E0B0FF'> </div> !} PRRRS: {!</td><td>!} [+ disp_rad_votes_france +]% {!</td><td>!} [+ str_votes_change_rad_france +] {!</td><td>!} [+ disp_rad_r_france +]% {!</td><td>!} [+ str_change_rad_france +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#E0B0FF'> </div> !} <span class="tooltip-text" title="Republican, Radical and Radical-Socialist Party">PRRRS</span>: {!</td><td>!} [+ disp_rad_votes_france +]% {!</td><td>!} [+ str_votes_change_rad_france +] {!</td><td>!} [+ disp_rad_r_france +]% {!</td><td>!} [+ str_change_rad_france +] {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#aa4fff'> </div> !} RI: {!</td><td>!} [+ disp_ind_rad_votes_france +]% {!</td><td>!} [+ str_votes_change_rad2_france +] {!</td><td>!} [+ disp_ind_rad_r_france +]% {!</td><td>!} [+ str_change_rad2_france +] {!</td></tr>!}
+<tr><td colspan="5" style="text-align: center;"><strong>Republican and Democratic Union</strong></td></tr>
 
-{!<tr><td><div class="box" style='background-color:#FFBF00'> </div> !} AD: {!</td><td>!} [+ ad_france_elections_vote +]% {!</td><td>!} [+ str_votes_change_ad_france +] {!</td><td>!} [+ ad_r_france +]% {!</td><td>!} [+ str_change_ad_france +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#FFBF00'> </div> !} <span class="tooltip-text" title="Democratic Alliance">AD</span>: {!</td><td>!} [+ ad_france_elections_vote +]% {!</td><td>!} [+ str_votes_change_ad_france +] {!</td><td>!} [+ ad_r_france +]% {!</td><td>!} [+ str_change_ad_france +] {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#00CCCC'> </div> !} PDP: {!</td><td>!} [+ pdp_france_elections_vote +]% {!</td><td>!} [+ str_votes_change_ad_france +] {!</td><td>!} [+ pdp_r_france +]% {!</td><td>!} [+ str_change_pdp_france +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#005ACA'> </div> !} <span class="tooltip-text" title=" Republican Federation">FR</span>: {!</td><td>!} [+ disp_fr_votes_france +]% {!</td><td>!} [+ str_votes_change_fr_france +] {!</td><td>!} [+ disp_fr_r_france +]% {!</td><td>!} [+ str_change_fr_france +] {!</td></tr>!}
 
-{!<tr><td><div class="box" style='background-color:#005ACA'> </div> !} FR: {!</td><td>!} [+ disp_fr_votes_france +]% {!</td><td>!} [+ str_votes_change_fr_france +] {!</td><td>!} [+ disp_fr_r_france +]% {!</td><td>!} [+ str_change_fr_france +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#aa4fff'> </div> !} <span class="tooltip-text" title="Independent Radicals">RI</span>: {!</td><td>!} [+ disp_ind_rad_votes_france +]% {!</td><td>!} [+ str_votes_change_rad2_france +] {!</td><td>!} [+ disp_ind_rad_r_france +]% {!</td><td>!} [+ str_change_rad2_france +] {!</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#00CCCC'> </div> !} <span class="tooltip-text" title="Popular Democratic Party">RI</span>: {!</td><td>!} [+ pdp_france_elections_vote +]% {!</td><td>!} [+ str_votes_change_ad_france +] {!</td><td>!} [+ pdp_r_france +]% {!</td><td>!} [+ str_change_pdp_france +] {!</td></tr>!}
  
-{!<tr><td><div class="box" style='background-color:#ADC1FD'> </div> !} DVD: {!</td><td>!} [+ disp_ind_fr_votes_france +]% {!</td><td>!} [+ str_votes_change_fr2_france +] {!</td><td>!} [+ disp_ind_fr_r_france +]% {!</td><td>!} [+ str_change_fr2_france +] {!</td></tr>!}
+{!<tr><td><div class="box" style='background-color:#ADC1FD'> </div> !} <span class="tooltip-text" title="Miscellaneous Right">DVD</span>: {!</td><td>!} [+ disp_ind_fr_votes_france +]% {!</td><td>!} [+ str_votes_change_fr2_france +] {!</td><td>!} [+ disp_ind_fr_r_france +]% {!</td><td>!} [+ str_change_fr2_france +] {!</td></tr>!}
+
+<tr><td colspan="5" style="text-align: center;"><strong>French Section of the Communist International</strong></td></tr>
+
+{!<tr><td><div class="box" style='background-color:#700000'> </div> !}<span class="tooltip-text" title="French Communist Party">PCF</span>: {!</td><td>!} [+ pcf_france_elections_vote +]% {!</td><td>!} [+ str_votes_change_pcf_france +] {!</td><td>!} [+ pcf_r_france +]% {!</td><td>!} [+ str_change_pcf_france +] {!</td></tr>!}
+
+{!<tr><td><div class="box" style='background-color:#B22222'> </div> !}<span class="tooltip-text" title="Proletarian Unity Party">PUP</span>: {!</td><td>!} [+ pup_france_elections_vote +]% {!</td><td>!} [+ str_votes_change_pup_france +] {!</td><td>!} [+ pup_r_france +]% {!</td><td>!} [+ str_change_pup_france +] {!</td></tr>!}
+
 {!</table>!}
 
-Left Cartel (<span style="color: #F0001C;">**SFIO**</span> + <span style="color: #DE3163;">**PRS**</span> + <span style="color: #E0B0FF;">**PRRRS**</span>[? if sapd_formed:&nbsp;+ <span style="color: #aa4fff;">**RI**</span>?]): [+ left_coalition_france +]% 
 
-Right-wing Coalition (<span style="color: #FFBF00;">**AD**</span> + <span style="color: #005ACA;">**FR**</span> + <span style="color: #00CCCC;">**PDP**</span>): [+ bourgeois_coalition_france +]% 
+Popular Front (<span style="color: #700000;" class="tooltip-text" title="French Communist Party">**PCF**</span> + <span style="color: #B22222;" class="tooltip-text" title="Proletarian Unity Party">**PUP**</span> + <span style="color: #F0001C;" class="tooltip-text" title="French Section of the Workers' International">**SFIO**</span> + <span style="color: #FF6699;" class="tooltip-text" title="Republican-Socialist Party">**PRS**</span>): [+ pop_front_france +]% 
 
-Republican Concentration (<span style="color: #DE3163;">**PRS**</span> + <span style="color: #E0B0FF;">**RAD**</span> + <span style="color: #aa4fff;">**RI**</span> + <span style="color: #FFBF00;">**AD**</span>): [+ republican_coalition_france +]%
+Left Cartel (<span style="color: #F0001C;" class="tooltip-text" title="French Section of the Workers' International">**SFIO**</span> + <span style="color: #FF6699;" class="tooltip-text" title="Republican-Socialist Party">**PRS**</span> + <span style="color: #E0B0FF;" class="tooltip-text" title="Republican, Radical and Radical-Socialist Party">**PRRRS**</span>): [+ left_coalition_france +]% 
+
+Right-wing Coalition (<span style="color: #aa4fff;" class="tooltip-text" title="Independent Radicals">**RI**</span> + <span style="color: #00CCCC;" class="tooltip-text" title="Popular Democratic Party">**PDP**</span> + <span style="color: #FFBF00;" class="tooltip-text" title="Democratic Alliance">**AD**</span> + <span style="color: #005ACA;" class="tooltip-text" title="Republican Federation">**FR**</span>): [+ bourgeois_coalition_france +]% 
+
+Republican Concentration (<span style="color: #FF6699;" class="tooltip-text" title="Republican-Socialist Party">**PRS**</span> + <span style="color: #E0B0FF;" class="tooltip-text" title="Radical Party">**RAD**</span> + <span style="color: #aa4fff;" class="tooltip-text" title="Independent Radicals">**RI**</span> + <span style="color: #FFBF00;" class="tooltip-text" title="Democratic Alliance">**AD**</span>): [+ republican_coalition_france +]%
+
 
 @france_coalition_menu
 
-<span style="color: #002654;">France</span> is known for its historically unstable governments, with most cabinets lasting a few months at best. The last four years have been governed by various groupings of parties to the right of the <span style="color: #F0001C;">**SFIO**</span>, our <span style="color: #c00000;">socialist</span> comrades. Perhaps it's their turn to rule now, with the return of the Left-Cartel alliance. However, concerns over their radical economic policies may push the <span style="color: #DE3163;">**PRS**</span> and <span style="color: #E0B0FF;">**PRRRS**</span> to form a coalition with the <span style="color: #FFBF00;">**AD**</span> instead.
+<span style="color: #002654;">France</span> is known for its historically unstable governments, with most cabinets lasting a few months at best. The last four years have been governed by various groupings of parties to the right of the <span style="color: #F0001C;">**SFIO**</span>, our <span style="color: #c00000;">socialist</span> comrades. Perhaps it's their turn to rule now, with the return of the Left-Cartel alliance. However, concerns over their radical economic policies may push the <span style="color: #FF6699;">**PRS**</span> and <span style="color: #E0B0FF;">**PRRRS**</span> to form a coalition with the <span style="color: #FFBF00;">**AD**</span> instead.
 
+- @pop_front_france
+- @left_cartel_france
 - @center_right_france
+- @right_wing_france
 
+@pop_front_france
+title: The <span style="color: #c00000;">**SFIO**</span> abandons the <span style="color: #E0B0FF;">**PRRRS**</span> and forms a government with the <span style="color: #700000;">**PCF**</span>!
+subtitle: Cheater.
+unavailable-subtitle: <span style="color: #700000;">PCF</span> + <span style="color: #B22222;">PUP</span> + <span style="color: #F0001C;">SFIO</span> + <span style="color: #FF6699;">PRS</span> ([+ pop_front_france +]%)
+choose-if: pop_front_france >= 50
+on-arrival: dataminer_detected = 1
+
+ok.
 
 @center_right_france
-title: The <span style="color: #DE3163;">**PRS**</span> and <span style="color: #E0B0FF;">**PRRRS**</span> enter government with the right-liberal <span style="color: #FFBF00;">**AD**</span>.
+title: The <span style="color: #FF6699;">**PRS**</span> and <span style="color: #E0B0FF;">**PRRRS**</span> enter government with the right-liberal <span style="color: #FFBF00;">**AD**</span>.
 subtitle: The economically right-wing <span style="color: #E0B0FF;">**PRRRS**</span> and <span style="color: #aa4fff;">**RI**</span> are opposed to the <span style="color: #F0001C;">**SFIO**</span>'s socialistic policies.
+unavailable-subtitle: The <span style="color: #E0B0FF;">**PRRRS**</span> would rather work with their electoral allies.
+choose-if: left_coalition_france < republican_coalition_france
+on-arrival: west_relation += 2; reparations_negotiation += 1
 
 While not the best outcome, the return of the <span style="color: #E0B0FF;">Radical</span> Édouard Herriot to the Prime Minister position is excellent news for our relations with <span style="color: #002654;">France</span>, as he is much more open to renegotiating Germany's reparation payments compared to the previous government.
+
+@left_cartel_france
+title: The <span style="color: #FFC0C0;">Left-Cartel</span> shall enter government.
+subtitle: The strong electoral results of the <span style="color: #F0001C;">**SFIO**</span> and <span style="color: #FF6699;">**PRS**</span> have pressured the <span style="color: #E0B0FF;">**PRRRS**</span> to enter government with their electoral allies.
+unavailable-subtitle: The <span style="color: #E0B0FF;">**PRRRS**</span> would rather work pursue an agreement with the <span style="color: #FFBF00;">**AD**</span>.
+choose-if: left_coalition_france >= republican_coalition_france
+on-arrival: west_relation += 3; reparations_negotiation += 2; eu_progress += 1; left_cartel_france = 1
+
+Surprisingly, the <span style="color: #E0B0FF;">**PRRRS**</span> have decided to enter government with the <span style="color: #F0001C;">**SFIO**</span>, despite their concerns over economic matters. <span style="color: #E0B0FF;">Radical</span> Édouard Herriot has been appointed as the new Prime Minister.
+
+This is excellent news for our relations with <span style="color: #002654;">France</span>, as he and our <span style="color: #F0001C;">socialist</span> comrades are much more open to renegotiating Germany's reparation payments compared to the previous government. There are even talks of a <span style="color: #FFDD00;">United States</span> of <span style="color: #001489;">Europe</span> within their new left-wing cabinet.
+
+@right_wing_france
+title: A Right-wing Coalition is somehow formed, without needing the <span style="color: #E0B0FF;">**PRRRS**</span>.
+subtitle: Cheater.
+unavailable-subtitle: <span style="color: #aa4fff;">**RI**</span> + <span style="color: #00CCCC;">**PDP**</span> + <span style="color: #FFBF00;">**AD**</span> + <span style="color: #005ACA;">**FR**</span> ([+ bourgeois_coalition_france +]%)
+choose-if: bourgeois_coalition_france >= 50
+on-arrival: dataminer_detected = 1
+
+ok.
