@@ -48,7 +48,7 @@ New Reichstag elections are scheduled for [+ next_election_month : month +] [+ n
 @reichstag_nay
 title: Vote against the motion of no confidence, and tolerate the cabinet.
 subtitle: The German parliamentary system desperately needs legitimacy. Forcing new elections now risks driving voters further into the extremes.
-choose-if: super_secret_mode
+choose-if: always
 unavailable-subtitle: Our parliamentary delegation won't listen to us anyway.
 
 Damn.
